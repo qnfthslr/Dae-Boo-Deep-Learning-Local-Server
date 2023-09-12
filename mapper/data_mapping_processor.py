@@ -7,6 +7,7 @@ class DataMappingProcessor:
     def __init__(self, file_path, column_name):
         self.file_path = file_path
         self.column_name = column_name
+        self.df = None
 
     def process_mapping(self):
         script_directory = os.path.dirname(__file__)
@@ -16,11 +17,11 @@ class DataMappingProcessor:
         print("absolute_file_path: ", absolute_file_path)
 
         reader_xlsx = ExcelReader(absolute_file_path)
-        df = reader_xlsx.read_file()
-        if df is not None:
+        self.df = reader_xlsx.read_file()
+        if self.df is not None:
             columns = reader_xlsx.get_columns()
             if columns is not None and self.column_name in columns:
-                data_mapper = DataMapper(df, self.column_name)
+                data_mapper = DataMapper(self.df, self.column_name)
 
                 try:
                     data_mapper.apply_mapping()
@@ -36,6 +37,9 @@ class DataMappingProcessor:
 
     def set_column_name(self, new_column_name):
         self.column_name = new_column_name
+
+    def get_dataframe(self):
+        return self.df
 
 
 if __name__ == "__main__":
