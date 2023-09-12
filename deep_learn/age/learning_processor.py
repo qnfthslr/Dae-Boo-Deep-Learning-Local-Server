@@ -6,6 +6,7 @@ from writer.excel_writer import ExcelWriter
 from sklearn.model_selection import train_test_split
 from keras.models import Sequential
 from keras.layers import Dense
+from tensorflow import keras
 
 import numpy as np
 
@@ -21,6 +22,8 @@ class AgeBasedLearningProcessor:
         self.learning_output_dir = "../../data/model"
         self.file_path = None
         self.process_loop_count = len(columns)
+
+        self.encoded_info = {}
 
     def make_learning_data(self, file_path):
         self.file_path = file_path
@@ -64,6 +67,28 @@ class AgeBasedLearningProcessor:
 
         model.save(os.path.join(self.learning_output_dir, 'age_based_card_recommand.h5'))
 
+        encoded_age_type = keras.utils.to_categorical(X,
+                                                      num_classes=len(request_columns_map_data[0]))
+        encoded_card_number_type = keras.utils.to_categorical(y,
+                                                      num_classes=len(request_columns_map_data[1]))
+
+        print(f"encoded_age_type: {encoded_age_type}")
+        print(f"encoded_card_number_type: {encoded_card_number_type}")
+
+        print(f"len(encoded_age_type): {len(encoded_age_type)}")
+        print(f"len(encoded_card_number_type): {len(encoded_card_number_type)}")
+
+        self.encoded_info[self.request_columns[0]] = encoded_age_type;
+        self.encoded_info[self.request_columns[1]] = encoded_card_number_type;
+
+    def get_encoded_info(self, key):
+        if key in self.encoded_info:
+            return self.encoded_info[key]
+        else:
+            return None
+
+    def set_file_path(self, file_path):
+        self.file_path = file_path
 
     def make_map_data_to_excel(self):
         request_columns_map_data = []
