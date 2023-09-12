@@ -28,7 +28,7 @@ class DataMappingProcessor:
                     print(e)
 
                 print(data_mapper.card_mapping)
-                # print(df)
+                return data_mapper.card_mapping
             else:
                 print(f"'{self.column_name}' column not found in DataFrame.")
         else:
