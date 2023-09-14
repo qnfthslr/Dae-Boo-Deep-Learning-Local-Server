@@ -1,11 +1,13 @@
 import os
 from extractor.excel_extractor import ExcelExtractor
 
+# csv 파일 나누
+
 if __name__ == "__main__":
     script_directory = os.path.dirname(__file__)
     print("project_importer script_directory: ", script_directory)
 
-    file_path = "../data/add_card_data.csv"
+    file_path = "../data/output_01.csv"
     absolute_file_path = os.path.abspath(os.path.join(script_directory, file_path))
     print("absolute_file_path: ", absolute_file_path)
 

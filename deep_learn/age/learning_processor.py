@@ -10,6 +10,7 @@ from tensorflow import keras
 
 import numpy as np
 
+# 데이터 파일 처리하고 신경망 모델 학습
 
 class AgeBasedLearningProcessor:
     def __init__(self, columns, output_file_names):
@@ -40,7 +41,7 @@ class AgeBasedLearningProcessor:
         print("X_data: ", X_data)
         print("X_data type: ", type(X_data))
 
-        print("dataframe['카드 번호']: ", dataframe[self.request_columns[1]])
+        print("dataframe['card_id']: ", dataframe[self.request_columns[1]])
         print("request_columns_map_data[1]: ", request_columns_map_data[1])
 
         y_data = dataframe[self.request_columns[1]].replace(request_columns_map_data[1])
@@ -108,7 +109,7 @@ class AgeBasedLearningProcessor:
 
 
 if __name__ == "__main__":
-    columns = ['연령대별', '카드 번호']
+    columns = ['age', 'card_id']
     output_names = ['age_map_data.xlsx', 'card_number_map_data.xlsx']
     file_path_for_read = '../data/chunk_1-5000.xlsx'
     learning_processor = AgeBasedLearningProcessor(columns, output_names)

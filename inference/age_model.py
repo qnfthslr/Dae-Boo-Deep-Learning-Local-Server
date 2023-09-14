@@ -3,12 +3,14 @@ import numpy as np
 from keras.models import load_model
 from tensorflow import keras
 
+# 카드 번호 예측
+
 from deep_learn.age.learning_processor import AgeBasedLearningProcessor
 
 if __name__ == "__main__":
     loaded_model = load_model(os.path.join("../data/model", 'age_based_card_recommand.h5'))
 
-    columns = ['연령대별', '카드 번호']
+    columns = ['age', 'card_id']
     output_names = ['age_map_data.xlsx', 'card_number_map_data.xlsx']
     learning_processor = AgeBasedLearningProcessor(columns, output_names)
 
@@ -36,9 +38,14 @@ if __name__ == "__main__":
     print(f"predicted_age_index: {predicted_age_index}")
     #predicted_age = request_columns_map_data[0][predicted_age_index]
 
-    age_data = np.array([request_columns_map_data[0]['20대']])
+    age_data = np.array([request_columns_map_data[0][20]])
     predicted_probs = loaded_model.predict(age_data)[0]
     recommended_card_indices = np.argsort(predicted_probs)[::-1][:5]
     recommended_card_numbers = [list(request_columns_map_data[1].keys())[i] for i in recommended_card_indices]
     print(f"recommended_card_numbers: {recommended_card_numbers}")
 
+    age_data = np.array([request_columns_map_data[0][30]])
+    predicted_probs = loaded_model.predict(age_data)[0]
+    recommended_card_indices = np.argsort(predicted_probs)[::-1][:5]
+    recommended_card_numbers = [list(request_columns_map_data[1].keys())[i] for i in recommended_card_indices]
+    print(f"recommended_card_numbers: {recommended_card_numbers}")

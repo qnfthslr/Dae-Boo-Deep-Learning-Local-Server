@@ -3,6 +3,8 @@ import os
 from age.data_mapper import DataMapper
 from reader.excel_reader import ExcelReader
 
+# excel 일겅와서 열의 데이터를 매핑
+
 class DataMappingProcessor:
     def __init__(self, file_path, column_name):
         self.file_path = file_path
@@ -45,9 +47,9 @@ class DataMappingProcessor:
 if __name__ == "__main__":
     file_path = "../data/chunk_1-5000.xlsx"
 
-    column_name = '카드 번호'
+    column_name = 'card_id'
     data_mapping_processor = DataMappingProcessor(file_path, column_name)
     data_mapping_processor.process_mapping()
 
-    data_mapping_processor.set_column_name('연령대별')
+    data_mapping_processor.set_column_name('age')
     data_mapping_processor.process_mapping()

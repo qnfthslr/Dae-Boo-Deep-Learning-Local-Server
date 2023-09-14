@@ -1,6 +1,8 @@
 import pandas as pd
 import os
 
+# 데이터 파일 읽어서 추출
+
 class ExcelExtractor:
     def __init__(self, file, separate_range, total_rows):
         self.file = file
@@ -63,12 +65,12 @@ if __name__ == "__main__":
     script_directory = os.path.dirname(__file__)
     print("project_importer script_directory: ", script_directory)
 
-    file_path = "../data/add_card_data.csv"
+    file_path = "../data/output_01.csv"
     absolute_file_path = os.path.abspath(os.path.join(script_directory, file_path))
     print("absolute_file_path: ", absolute_file_path)
 
-    separate_range = 100
-    total_rows = 500
+    separate_range = 5000
+    total_rows = 50000
 
     extractor = ExcelExtractor(absolute_file_path, separate_range, total_rows)
     output_format = "excel"

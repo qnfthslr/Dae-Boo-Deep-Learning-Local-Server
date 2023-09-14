@@ -3,6 +3,7 @@ import os
 
 from reader.excel_reader import ExcelReader
 
+# card_id 열의 데이터를 고유한 숫자로 매핑
 
 class DataMapper:
     def __init__(self, df, column_name):
@@ -36,8 +37,8 @@ if __name__ == "__main__":
     df = reader_xlsx.read_file()
     if df is not None:
         columns = reader_xlsx.get_columns()
-        if columns is not None and '카드 번호' in columns:
-            column_name = '카드 번호'
+        if columns is not None and 'card_id' in columns:
+            column_name = 'card_id'
             data_mapper = DataMapper(df, column_name)
 
             try:
@@ -48,6 +49,6 @@ if __name__ == "__main__":
             print(data_mapper.card_mapping)
             # print(df)
         else:
-            print("'카드 번호' column not found in DataFrame.")
+            print("'card_id' column not found in DataFrame.")
     else:
         print("DataFrame is empty.")

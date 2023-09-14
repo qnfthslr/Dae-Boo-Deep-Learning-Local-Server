@@ -45,7 +45,7 @@ if __name__ == "__main__":
 
     file_path = "../data/chunk_1-5000.xlsx"
 
-    column_name = '카드 번호'
+    column_name = 'card_id'
     data_mapping_processor = DataMappingProcessor(file_path, column_name)
     map_data = data_mapping_processor.process_mapping()
 
